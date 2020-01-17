@@ -32,4 +32,7 @@
       <DependentUpon>ItemIndexPage.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Views\game\" />
+  </ItemGroup>
 </Project>

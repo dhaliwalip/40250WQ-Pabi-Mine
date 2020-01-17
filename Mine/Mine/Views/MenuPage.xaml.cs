@@ -32,7 +32,9 @@ namespace Mine.Views
             {
 
                 new HomeMenuItemModel {Id = MenuItemEnum.Items, Title="About" },
+                new HomeMenuItemModel {Id = MenuItemEnum.About, Title="Game" },
                 new HomeMenuItemModel {Id = MenuItemEnum.About, Title="Items" }
+
             };
 
             // Register the ListView for the Menu and the Item Selected call back
