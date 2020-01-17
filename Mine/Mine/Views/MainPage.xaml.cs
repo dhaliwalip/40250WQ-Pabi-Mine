@@ -47,7 +47,7 @@ namespace Mine.Views
                         break;
                     case (int)MenuItemEnum.Game:
                         MenuPages.Add(id, new NavigationPage(new GamePage()));
-                            break;
+                        break;
                 }
             }
 
