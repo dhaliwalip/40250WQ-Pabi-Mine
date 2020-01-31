@@ -42,6 +42,8 @@ namespace Mine.Views
             await Navigation.PushAsync(new ItemUpdatePage(new ItemViewModel(ViewModel.Data)));
         }
 
+
+        /*
         /// <summary>
         /// Calls for Delete
         /// </summary>
@@ -51,5 +53,6 @@ namespace Mine.Views
         {
             await Navigation.PushAsync(new ItemDeletePage(new ItemViewModel(ViewModel.Data)));
         }
+        */
     }
 }
