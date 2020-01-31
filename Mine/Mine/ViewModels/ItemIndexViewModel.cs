@@ -60,6 +60,16 @@ namespace Mine.ViewModels
 
             return true;
         }
+        /// <summary>
+        /// APi to Read the Data
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
+        public async Task<ItemModel> Read(string id)
+        {
+            var result = await DataStore.ReadAsync(id);
+            return result;
+        }
 
         #region Refresh
         // Return True if a refresh is needed
