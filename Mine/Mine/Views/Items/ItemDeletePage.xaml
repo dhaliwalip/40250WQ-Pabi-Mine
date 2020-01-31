@@ -5,8 +5,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
              x:Class="Mine.Views.ItemDeletePage"
-             Title="{Binding Title}">
-    
+             Title="Delete">
+  
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Cancel" Clicked="Cancel_Clicked" />
         <ToolbarItem Text="Delete" Clicked="Delete_Clicked" />
