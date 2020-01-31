@@ -9,13 +9,13 @@
              x:Name="BrowseItemsPage">
 
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Add" Clicked="AddItem_Clicked" />
+        <ToolbarItem Text="Add" Clicked="AddItem_Clicked" IconImageSource="icon_add.png" />
     </ContentPage.ToolbarItems>
 
 
     <ContentPage.Content>
         <StackLayout>
-
+            
             <Label Text="Items List Page"/>
 
             <ListView x:Name="ItemsListView" 
