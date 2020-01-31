@@ -9,7 +9,7 @@
 
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Update" Clicked="Update_Clicked" />
-        <ToolbarItem Text="Delete" Clicked="Delete_Clicked" />
+        <ToolbarItem Text="Delete" Clicked="Delete_Clicked" IconImageSource="icon_edit.png" />
     </ContentPage.ToolbarItems>
     
     <StackLayout Spacing="20" Padding="15">
