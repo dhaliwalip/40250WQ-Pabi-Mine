@@ -37,7 +37,7 @@ namespace Mine.Views
         {
             MessagingCenter.Send(this, "Update", ViewModel.Data);
             Navigation.RemovePage(Navigation.NavigationStack[Navigation.NavigationStack.Count - 2]);
-            await Navigation.PopAsync();
+            //await Navigation.PopAsync();
         }
 
         /// <summary>
@@ -52,6 +52,7 @@ namespace Mine.Views
             await Navigation.PopAsync();
         }
 
+
         /// <summary>
         /// Update the avlue basead on cahnges to the stepper.
         /// </summary>
@@ -61,5 +62,7 @@ namespace Mine.Views
         {
             ValueValue.Text = String.Format("{0}", e.NewValue);
         }
+
+        
     }
 }

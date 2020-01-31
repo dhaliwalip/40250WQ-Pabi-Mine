@@ -39,11 +39,11 @@ namespace Mine.Views
         /// <param name="e"></param>
         async void Update_Clicked(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new ItemUpdatePage(new ItemViewModel(ViewModel.Data)));
+            await Navigation.PushModalAsync(new NavigationPage(new ItemUpdatePage(new ItemViewModel(ViewModel.Data))));
         }
 
 
-        /*
+        
         /// <summary>
         /// Calls for Delete
         /// </summary>
@@ -53,6 +53,6 @@ namespace Mine.Views
         {
             await Navigation.PushAsync(new ItemDeletePage(new ItemViewModel(ViewModel.Data)));
         }
-        */
+        
     }
 }
