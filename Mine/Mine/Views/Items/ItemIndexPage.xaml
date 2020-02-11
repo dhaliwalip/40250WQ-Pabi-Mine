@@ -11,14 +11,12 @@
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Add" Clicked="AddItem_Clicked" IconImageSource="icon_add.png" />
     </ContentPage.ToolbarItems>
-
-
+    
+    Pabi Still testing
     <ContentPage.Content>
         <StackLayout>
             
             <Label Text="Items List Page"/>
-
-
 
             <ListView x:Name="ItemsListView" 
                     ItemsSource="{Binding Dataset}"
