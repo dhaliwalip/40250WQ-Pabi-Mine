@@ -18,6 +18,8 @@
             
             <Label Text="Items List Page"/>
 
+
+
             <ListView x:Name="ItemsListView" 
                     ItemsSource="{Binding Dataset}"
                     IsRefreshing="{Binding IsBusy, Mode=OneWay}"
