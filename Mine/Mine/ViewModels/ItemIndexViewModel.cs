@@ -297,5 +297,30 @@ namespace Mine.ViewModels
             return result;
         }
 
+        /// <summary>
+        /// Having this at the ViewModel, because it has the DataStore
+        /// That allows the feature to work for both SQL and the Mock datastores...
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
+        public async Task<bool> CreateUpdateAsync(ItemModel data)
+        {
+            // Check to see if the data exist
+            var oldData = await ReadAsync(((ItemModel)(object)data).Id);
+            if (oldData == null)
+            {
+                await CreateAsync(data);
+                return true;
+            }
+
+            // Compare it, if different update in the DB
+            var UpdateResult = await UpdateAsync(data);
+            if (UpdateResult)
+            {
+                return true;
+            }
+
+            return false;
+        }
     }
 }
