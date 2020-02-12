@@ -83,6 +83,11 @@ namespace Mine.Services
             return data;
         }
 
+        /// <summary>
+        /// Update the record passed in if it exists
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
         public async Task<bool> UpdateAsync(ItemModel Data)
         {
             var myRead = await ReadAsync(((ItemModel)(object)Data).Id);
@@ -96,6 +101,11 @@ namespace Mine.Services
             return (result == 1);
         }
 
+        /// <summary>
+        /// Delete the record of the ID passed in
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public async Task<bool> DeleteAsync(string id)
         {
             var data = await ReadAsync(id);
@@ -107,6 +117,15 @@ namespace Mine.Services
             var result = await Database.DeleteAsync(data);
 
             return (result == 1);
+        }
+
+        /// <summary>
+        /// Return all records in the database
+        /// </summary>
+        /// <returns></returns>
+        public async Task<List<ItemModel>> IndexAsync()
+        {
+            return await Database.Table<ItemModel>().ToListAsync();
         }
     }
 }
