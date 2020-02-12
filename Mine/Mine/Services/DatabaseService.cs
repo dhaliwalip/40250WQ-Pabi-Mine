@@ -12,7 +12,7 @@ namespace Mine.Services
     /// Will write to the local data store
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public class DatabaseService<T> : IDataStore<ItemModel> where T : new()
+    public class DatabaseService : IDataStore<ItemModel>
     {
         /// <summary>
         /// Set the class to load on demand
@@ -43,33 +43,23 @@ namespace Mine.Services
         {
             if (!initialized)
             {
-                if (!Database.TableMappings.Any(m => m.MappedType.Name == typeof(T).Name))
+                if (!Database.TableMappings.Any(m => m.MappedType.Name == typeof(ItemModel).Name))
                 {
-                    await Database.CreateTablesAsync(CreateFlags.None, typeof(T)).ConfigureAwait(false);
+                    await Database.CreateTablesAsync(CreateFlags.None, typeof(ItemModel)).ConfigureAwait(false);
                     initialized = true;
                 }
             }
         }
 
         /// <summary>
-        /// Wipe Data List
-        /// Drop the tables and create new ones
+        /// Create a new record for the data passed in
         /// </summary>
-        public async Task<bool> WipeDataListAsync()
+        /// <param name="data"></param>
+        /// <returns></returns>
+        public async Task<bool> CreateAsync(ItemModel data)
         {
-            try
-            {
-                await Database.DropTableAsync<T>().ConfigureAwait(false);
-                await Database.CreateTablesAsync(CreateFlags.None, typeof(T));
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine("Error WipeData" + e.Message);
-            }
-
-            return await Task.FromResult(true);
+            var result = await Database.InsertAsync(data);
+            return (result == 1);
         }
-  
-       
     }
 }
