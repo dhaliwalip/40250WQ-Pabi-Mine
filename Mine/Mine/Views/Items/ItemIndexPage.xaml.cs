@@ -80,6 +80,7 @@ namespace Mine.Views
             if (viewModel.NeedsRefresh())
             {
                 viewModel.LoadDatasetCommand.Execute(null);
+
             }
 
             BindingContext = viewModel;
