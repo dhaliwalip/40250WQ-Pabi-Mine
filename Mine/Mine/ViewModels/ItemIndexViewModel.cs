@@ -248,5 +248,28 @@ namespace Mine.ViewModels
             var myData = await DataStore.ReadAsync(id);
             return myData;
         }
+
+        /// <summary>
+        /// Update the data
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
+        public async Task<bool> UpdateAsync(ItemModel data)
+        {
+            // Check that the record exists, if it does not, then exit with false
+            var record = await ReadAsync(((ItemModel)(object)data).Id);
+            if (record == null)
+            {
+                return false;
+            }
+
+            // Save the change to the Data Store
+            var result = await DataStore.UpdateAsync(record);
+
+            SetNeedsRefresh(true);
+
+            return result;
+        }
+
     }
 }
