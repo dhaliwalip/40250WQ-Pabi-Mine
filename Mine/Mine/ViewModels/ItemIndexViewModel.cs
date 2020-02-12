@@ -221,5 +221,15 @@ namespace Mine.ViewModels
             LoadDatasetCommand.Execute(null);
         }
         #endregion Refresh
+
+        public async Task<bool> CreateAsync(ItemModel data)
+        {
+            Dataset.Add(data);
+            var result = await DataStore.CreateAsync(data);
+
+            SetNeedsRefresh(true);
+
+            return result;
+        }
     }
 }
