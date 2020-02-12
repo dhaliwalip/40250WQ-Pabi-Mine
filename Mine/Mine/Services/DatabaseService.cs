@@ -82,5 +82,18 @@ namespace Mine.Services
 
             return data;
         }
+
+        public async Task<bool> UpdateAsync(ItemModel Data)
+        {
+            var myRead = await ReadAsync(((ItemModel)(object)Data).Id);
+            if (myRead == null)
+            {
+                return false;
+            }
+
+            var result = await Database.UpdateAsync(Data);
+
+            return (result == 1);
+        }
     }
 }
