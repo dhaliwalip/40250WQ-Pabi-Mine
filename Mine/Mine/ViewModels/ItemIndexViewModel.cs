@@ -222,6 +222,11 @@ namespace Mine.ViewModels
         }
         #endregion Refresh
 
+        /// <summary>
+        /// API to add the Data
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
         public async Task<bool> CreateAsync(ItemModel data)
         {
             Dataset.Add(data);
@@ -230,6 +235,18 @@ namespace Mine.ViewModels
             SetNeedsRefresh(true);
 
             return result;
+        }
+
+
+        /// <summary>
+        /// Get the data
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public async Task<ItemModel> ReadAsync(string id)
+        {
+            var myData = await DataStore.ReadAsync(id);
+            return myData;
         }
     }
 }
