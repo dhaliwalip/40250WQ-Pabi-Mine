@@ -36,7 +36,7 @@ namespace Mine.ViewModels
         /// </summary>
         public ItemIndexViewModel()
         {
-            Title = "Browse";
+            Title = "Items";
 
             Dataset = new ObservableCollection<ItemModel>();
             LoadDatasetCommand = new Command(async () => await ExecuteLoadDataCommand());
@@ -47,18 +47,28 @@ namespace Mine.ViewModels
                 await Add(data as ItemModel);
             });
 
-            // Register the Update Message
-            MessagingCenter.Subscribe<ItemDeletePage, ItemModel>(this, "Update", async (obj, data) =>
-            {
-                await Update(data as ItemModel);
-            });
-
             // Register the Delete Message
             MessagingCenter.Subscribe<ItemDeletePage, ItemModel>(this, "Delete", async (obj, data) =>
             {
                 await Delete(data as ItemModel);
             });
 
+            // Register the Update Message
+            MessagingCenter.Subscribe<ItemUpdatePage, ItemModel>(this, "Update", async (obj, data) =>
+            {
+                await Update(data as ItemModel);
+            });
+        }
+
+        /// <summary>
+        /// API to Read the Data
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
+        public async Task<ItemModel> Read(string id)
+        {
+            var result = await DataStore.ReadAsync(id);
+            return result;
         }
 
         /// <summary>
@@ -68,6 +78,12 @@ namespace Mine.ViewModels
         /// <returns></returns>
         public async Task<bool> Add(ItemModel data)
         {
+            // Don't try to add bad records
+            if (data == null)
+            {
+                return false;
+            }
+
             Dataset.Add(data);
             var result = await DataStore.CreateAsync(data);
 
@@ -81,9 +97,14 @@ namespace Mine.ViewModels
         /// <returns></returns>
         public async Task<bool> Delete(ItemModel data)
         {
+            if (data == null)
+            {
+                return false;
+            }
 
+            // Check that the record exists, if it does not, then exit with false
             var record = await Read(data.Id);
-            if(record == null)
+            if (record == null)
             {
                 return false;
             }
@@ -102,7 +123,12 @@ namespace Mine.ViewModels
         /// <returns></returns>
         public async Task<bool> Update(ItemModel data)
         {
-            //Check that the records exists, if it does not, then exit with false...
+            if (data == null)
+            {
+                return false;
+            }
+
+            // Check that the record exists, if it does not, then exit with false
             var record = await Read(data.Id);
             if (record == null)
             {
@@ -111,21 +137,10 @@ namespace Mine.ViewModels
 
             record.Update(data);
 
-            var result = await DataStore.DeleteAsync(data.Id);
+            var result = await DataStore.UpdateAsync(record);
 
             await ExecuteLoadDataCommand();
 
-            return result;
-        }
-
-        /// <summary>
-        /// APi to Read the Data
-        /// </summary>
-        /// <param name="data"></param>
-        /// <returns></returns>
-        public async Task<ItemModel> Read(string id)
-        {
-            var result = await DataStore.ReadAsync(id);
             return result;
         }
 
@@ -141,6 +156,11 @@ namespace Mine.ViewModels
             }
 
             return false;
+        }
+
+        public bool GetNeedsRefresh()
+        {
+            return _needsRefresh;
         }
 
         // Sets the need to refresh
@@ -161,6 +181,11 @@ namespace Mine.ViewModels
 
             try
             {
+                if (Dataset == null)
+                {
+                    throw new InvalidOperationException();
+                }
+
                 Dataset.Clear();
                 var dataset = await DataStore.IndexAsync(true);
 

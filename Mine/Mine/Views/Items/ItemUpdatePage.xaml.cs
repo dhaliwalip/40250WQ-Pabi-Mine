@@ -18,6 +18,11 @@ namespace Mine.Views
         // View Model for Item
         ItemViewModel ViewModel;
 
+        // Constructor for UTs
+        public ItemUpdatePage()
+        {
+        }
+
         /// <summary>
         /// Constructor that takes and existing data item
         /// </summary>
@@ -33,11 +38,10 @@ namespace Mine.Views
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        async void Save_Clicked(object sender, EventArgs e)
+        public async void Save_Clicked(object sender, EventArgs e)
         {
             MessagingCenter.Send(this, "Update", ViewModel.Data);
-            Navigation.RemovePage(Navigation.NavigationStack[Navigation.NavigationStack.Count - 2]);
-            //await Navigation.PopAsync();
+            await Navigation.PopModalAsync();   // Remove this page
         }
 
         /// <summary>
@@ -45,24 +49,27 @@ namespace Mine.Views
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        async void Cancel_Clicked(object sender, EventArgs e)
+        public async void Cancel_Clicked(object sender, EventArgs e)
         {
-            Navigation.RemovePage(Navigation.NavigationStack[Navigation.NavigationStack.Count - 2]);
-
-            await Navigation.PopAsync();
+            await Navigation.PopModalAsync();   // Remove this page
         }
 
-
         /// <summary>
-        /// Update the avlue basead on cahnges to the stepper.
+        /// Update the Value based on changes to the stepper
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        void Value_OnStepperValueChanged(object sender, ValueChangedEventArgs e)
+        public void Value_OnStepperValueChanged(object sender, ValueChangedEventArgs e)
         {
             ValueValue.Text = String.Format("{0}", e.NewValue);
         }
 
-        
+        protected override bool OnBackButtonPressed()
+        {
+            // base.OnBackButtonPressed();
+
+            // Add your code here...
+            return true;
+        }
     }
 }

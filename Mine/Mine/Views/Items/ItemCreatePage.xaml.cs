@@ -18,16 +18,23 @@ namespace Mine.Views
         // The item to create
         ItemViewModel ViewModel { get; set; }
 
+        // Constructor for UTs
+        public ItemCreatePage()
+        {
+        }
+
         /// <summary>
         /// Constructor for Create makes a new model
         /// </summary>
         public ItemCreatePage(ItemViewModel data)
         {
+
             InitializeComponent();
 
             data.Data = new ItemModel();
 
             BindingContext = this.ViewModel = data;
+
         }
 
         /// <summary>
@@ -35,7 +42,7 @@ namespace Mine.Views
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        async void Save_Clicked(object sender, EventArgs e)
+        public async void Save_Clicked(object sender, EventArgs e)
         {
             MessagingCenter.Send(this, "Create", ViewModel.Data);
             await Navigation.PopModalAsync();
@@ -46,20 +53,18 @@ namespace Mine.Views
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        async void Cancel_Clicked(object sender, EventArgs e)
+        public async void Cancel_Clicked(object sender, EventArgs e)
         {
             await Navigation.PopModalAsync();
         }
 
-        void Value_OnStepperValueChanged(object sender, ValueChangedEventArgs e)
+        public void Value_OnStepperValueChanged(object sender, ValueChangedEventArgs e)
         {
             ValueValue.Text = String.Format("{0}", e.NewValue);
         }
 
         protected override bool OnBackButtonPressed()
         {
-            base.OnBackButtonPressed();
-
             return true;
         }
     }

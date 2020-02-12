@@ -7,19 +7,19 @@
     {
         // Add Unique attributes for Item
 
-        // The value of an item
+        // The Value of the item
         public int Value { get; set; } = 0;
 
         public bool Update(ItemModel data)
         {
-            //Do not update the ID, if you do, the record will be orphaned
-            //Id= data.Id;
+            // Do not update the ID, if you do, the record will be orphaned
+            // Id = data.Id;
 
-            //Update teh Base
+            // Update the Base
             Name = data.Name;
             Description = data.Description;
 
-            //Update the extended
+            // Update the extended
             Value = data.Value;
 
             return true;

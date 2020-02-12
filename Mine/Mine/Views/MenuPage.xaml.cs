@@ -13,7 +13,7 @@ namespace Mine.Views
     [DesignTimeVisible(false)]
     public partial class MenuPage : ContentPage
     {
-        MainPage RootPage { get => Application.Current.MainPage as MainPage; }
+        public MainPage RootPage { get => Application.Current.MainPage as MainPage; }
 
         // List of Menu Items
         List<HomeMenuItemModel> menuItems;
@@ -30,8 +30,9 @@ namespace Mine.Views
             // Establish the Menu List
             menuItems = new List<HomeMenuItemModel>
             {
-                new HomeMenuItemModel {Id = MenuItemEnum.Browse, Title="Browse" },
-                new HomeMenuItemModel {Id = MenuItemEnum.About, Title="About" }
+                new HomeMenuItemModel {Id = MenuItemEnum.About, Title="About" },
+                new HomeMenuItemModel {Id = MenuItemEnum.Game, Title="Game" },
+                new HomeMenuItemModel {Id = MenuItemEnum.Items, Title="Items" }
             };
 
             // Register the ListView for the Menu and the Item Selected call back

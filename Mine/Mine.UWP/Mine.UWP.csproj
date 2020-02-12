@@ -104,6 +104,11 @@
     </AppxManifest>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="icon_add.png" />
+    <Content Include="icon_cancel.png" />
+    <Content Include="icon_delete.png" />
+    <Content Include="icon_edit.png" />
+    <Content Include="icon_save.png" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LargeTile.scale-100.png" />
     <Content Include="Assets\LargeTile.scale-200.png" />
@@ -148,22 +153,15 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Xamarin.Forms" Version="4.4.0.991265" />
+    <PackageReference Include="Xamarin.Forms" Version="4.5.0.266-pre3" />
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform" Version="6.2.9" />
-    <PackageReference Include="Xamarin.Essentials" Version="1.3.1" />
+    <PackageReference Include="Xamarin.Essentials" Version="1.4.0-pre2" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Mine\Mine.csproj">
       <Project>{346C8141-0518-4BA8-8B33-FB945E062DD4}</Project>
       <Name>Mine</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Assets\icon_add.png" />
-    <None Include="Assets\icon_cancel.png" />
-    <None Include="Assets\icon_delete.png" />
-    <None Include="Assets\icon_edit.png" />
-    <None Include="Assets\icon_save.png" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>

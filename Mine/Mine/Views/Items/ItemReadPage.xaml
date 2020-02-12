@@ -8,8 +8,8 @@
              Title="Read">
 
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Update" Clicked="Update_Clicked" />
-        <ToolbarItem Text="Delete" Clicked="Delete_Clicked" IconImageSource="icon_edit.png" />
+        <ToolbarItem Text="Update" Clicked="Update_Clicked" IconImageSource="icon_edit.png"/>
+        <ToolbarItem Text="Delete" Clicked="Delete_Clicked" IconImageSource="icon_delete.png"/>
     </ContentPage.ToolbarItems>
     
     <StackLayout Spacing="20" Padding="15">
@@ -17,8 +17,8 @@
         <Label Text="{Binding Data.Name}" FontSize="Small"/>
         <Label Text="Description:" FontSize="Medium" />
         <Label Text="{Binding Data.Description}" FontSize="Small"/>
-        <Label Text="Value" FontSize="Medium" />
-        <Label Text="{Binding Data.Value}" FontSize="Small" />
+        <Label Text="Value:" FontSize="Medium" />
+        <Label Text="{Binding Data.Value}" FontSize="Small"/>
     </StackLayout>
     
 </ContentPage>

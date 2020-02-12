@@ -5,11 +5,11 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
              x:Class="Mine.Views.ItemUpdatePage"
-             Title="Update ">
+             Title="Update">
     
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Cancel" Clicked="Cancel_Clicked" />
-        <ToolbarItem Text="Save" Clicked="Save_Clicked" IconImageSource="icon_save.png" />
+        <ToolbarItem Text="Cancel" Clicked="Cancel_Clicked" IconImageSource="icon_cancel.png"/>
+        <ToolbarItem Text="Save" Clicked="Save_Clicked" IconImageSource="icon_save.png"/>
     </ContentPage.ToolbarItems>
     
     <ContentPage.Content>
@@ -19,20 +19,21 @@
             <Label Text="Description" FontSize="Medium" />
             <Editor Text="{Binding Data.Description}" d:Text="Item description" FontSize="Small" Margin="0" AutoSize="TextChanges"/>
 
-        <StackLayout
-            Orientation="Horizontal"
-            >
-            <Stepper
-                Value="{Binding Data.Value, Mode=TwoWay}"
-                Minimum="0"
-                Maximum="10"
-                ValueChanged="Value_OnStepperValueChanged"
-                Increment="1"/>
-            <Label
-                x:Name="ValueValue"
-                Text="{Binding Data.Value}"
-                FontSize="Medium" />
-        </StackLayout>    
+            <Label Text="Value" FontSize="Medium" />
+            <StackLayout Orientation="Horizontal" >
+
+                <Stepper 
+                    Value="{Binding Data.Value, Mode=TwoWay}"
+                    Minimum="0"
+                    Maximum="10"
+                    ValueChanged="Value_OnStepperValueChanged"
+                    Increment="1"/>
+
+                <Label 
+                    x:Name="ValueValue"
+                    Text="{Binding Data.Value}" 
+                    FontSize="Medium"/>
+            </StackLayout>
         </StackLayout>
     </ContentPage.Content>
     

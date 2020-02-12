@@ -6,10 +6,10 @@
              mc:Ignorable="d"
              x:Class="Mine.Views.ItemDeletePage"
              Title="Delete">
-  
+    
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Cancel" Clicked="Cancel_Clicked" />
-        <ToolbarItem Text="Delete" Clicked="Delete_Clicked" IconImageSource="icon_delete.png" />
+        <ToolbarItem Text="Cancel" Clicked="Cancel_Clicked" IconImageSource="icon_cancel.png"/>
+        <ToolbarItem Text="Delete" Clicked="Delete_Clicked" IconImageSource="icon_delete.png"/>
     </ContentPage.ToolbarItems>
     
     <StackLayout Spacing="20" Padding="15">
@@ -18,18 +18,18 @@
         <Label Text="Description:" FontSize="Medium" />
         <Label Text="{Binding Data.Description}" d:Text="Item description" FontSize="Small"/>
 
-        <StackLayout
-            HorizontalOptions="Center"
+        <StackLayout 
+            HorizontalOptions="Center" 
             Padding="20">
 
             <Label Text="Really delete this?" FontSize="Medium"></Label>
-            <Button
-                Text="Yes"
-                Clicked="Delete_Clicked"
+            <Button 
+                Text="Yes" 
+                Clicked="Delete_Clicked" 
                 HorizontalOptions="Center"
                 FontSize="Medium"
-                BorderWidth="1"
-                BorderColor="Black">
+                BorderWidth="1" 
+                BorderColor="black">
             </Button>
         </StackLayout>
     </StackLayout>
