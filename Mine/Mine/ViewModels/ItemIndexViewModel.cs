@@ -37,6 +37,8 @@ namespace Mine.ViewModels
             {
                 DataStore = DataSource_Mock;
             }
+
+            SetNeedsRefresh(true);
             return true;
         }
         // Command to force a Load of data
@@ -73,6 +75,18 @@ namespace Mine.ViewModels
             MessagingCenter.Subscribe<ItemUpdatePage, ItemModel>(this, "Update", async (obj, data) =>
             {
                 await UpdateAsync(data as ItemModel);
+            });
+
+            //Register the Set Data Source Message
+            MessagingCenter.Subscribe<AboutPage, int>(this, "SetDataSource", (obj, data) =>
+             {
+                 SetDataSource(data);
+             });
+
+            //Register the update Message
+            MessagingCenter.Subscribe<AboutPage, int>(this, "SetDataSource", (obj, data) =>
+            {
+                SetDataSource(data);
             });
         }
 
