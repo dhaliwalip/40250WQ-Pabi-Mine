@@ -27,6 +27,8 @@ namespace Mine.ViewModels
         public IDataStore<ItemModel> DataSource_SQL => new DatabaseService();
         public IDataStore<ItemModel> DataStore;
 
+        public int CurrentDataSource = 0;
+
         public bool SetDataSource(int isSql)
         {
             if (isSql == 1)

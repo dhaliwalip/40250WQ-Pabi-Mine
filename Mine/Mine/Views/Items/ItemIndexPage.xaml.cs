@@ -68,13 +68,7 @@ namespace Mine.Views
         {
             base.OnAppearing();
 
-            BindingContext = null;
-
-            // If no data, then set it for needing refresh
-            if (viewModel.Dataset.Count == 0)
-            {
-                viewModel.SetNeedsRefresh(true);
-            }
+            //BindingContext = null;
 
             // If the needs Refresh flag is set update it
             if (viewModel.NeedsRefresh())
@@ -82,6 +76,14 @@ namespace Mine.Views
                 viewModel.LoadDatasetCommand.Execute(null);
 
             }
+
+            // If no data, then set it for needing refresh
+            if (viewModel.Dataset.Count == 0)
+            {
+                viewModel.SetNeedsRefresh(true);
+            }
+
+            
 
             BindingContext = viewModel;
         }
