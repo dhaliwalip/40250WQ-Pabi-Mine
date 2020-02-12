@@ -44,19 +44,19 @@ namespace Mine.ViewModels
             // Register the Create Message
             MessagingCenter.Subscribe<ItemCreatePage, ItemModel>(this, "Create", async (obj, data) =>
             {
-                await Add(data as ItemModel);
+                await CreateAsync(data as ItemModel);
             });
 
             // Register the Delete Message
             MessagingCenter.Subscribe<ItemDeletePage, ItemModel>(this, "Delete", async (obj, data) =>
             {
-                await Delete(data as ItemModel);
+                await DeleteAsync(data as ItemModel);
             });
 
             // Register the Update Message
             MessagingCenter.Subscribe<ItemUpdatePage, ItemModel>(this, "Update", async (obj, data) =>
             {
-                await Update(data as ItemModel);
+                await UpdateAsync(data as ItemModel);
             });
         }
 
