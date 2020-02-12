@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 using Xamarin.Forms;
 
 namespace Mine.Views
@@ -19,6 +20,18 @@ namespace Mine.Views
             InitializeComponent();
 
             CurrentDateTime.Text = System.DateTime.Now.ToString("MM/dd/yy hh:mm:ss");
+        }
+
+        async void DataSource_toggled(object sender, EventArgs e)
+        {
+            if(DataSourceValue.IsToggled == true)
+            {
+
+            }
+            else
+            {
+
+            }
         }
     }
 }
