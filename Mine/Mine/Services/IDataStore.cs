@@ -15,6 +15,6 @@ namespace Mine.Services
         Task<T> ReadAsync(string id);
         //Task<IEnumerable<T>> IndexAsync(bool forceRefresh = false);
         Task<List<T>> IndexAsync();
-        Task<bool> WhipDataListAsync();
+        Task<bool> WipeDataListAsync();
     }
 }

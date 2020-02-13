@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Collections.ObjectModel;
 using Xamarin.Forms;
 using System.Linq;
+using System.Collections.Generic;
 
 namespace Mine.ViewModels
 {
@@ -114,16 +115,18 @@ namespace Mine.ViewModels
             });
 
             //Register the Set Data Source Message
-            MessagingCenter.Subscribe<AboutPage, int>(this, "SetDataSource", (obj, data) =>
+            MessagingCenter.Subscribe<AboutPage, int>(this, "SetDataSource",async (obj, data) =>
              {
-                 SetDataSource(data);
+                 await SetDataSource(data);
              });
 
-            //Register the update Message
-            MessagingCenter.Subscribe<AboutPage, int>(this, "SetDataSource", (obj, data) =>
+            //Register the wipe Data Source Message
+            MessagingCenter.Subscribe<AboutPage, int>(this, "WipeDataAsync", async (obj, data) =>
             {
-                SetDataSource(data);
+                await WipeDataListAsync();
             });
+
+
         }
 
         /// <summary>
@@ -395,6 +398,39 @@ namespace Mine.ViewModels
             LoadDatasetCommand = new Command(async () => await ExecuteLoadDataCommand());
 
             await SetDataSource(CurrentDataSource);   // Set to Mock to start with
+        }
+
+        public async Task<bool> WipeDataListAsync()
+        {
+            await DataStore.WipeDataListAsync();
+
+            //load sample data
+            await LoadDefaultDataAsync();
+
+            SetNeedsRefresh(true);
+
+            return await Task.FromResult(true);
+
+        }
+
+        public async Task<bool> LoadDefaultDataAsync()
+        {
+            if(Dataset.Count > 0)
+            {
+                return false;
+            }
+
+            foreach (var data in GetDefaultData())
+            {
+                await CreateUpdateAsync(data);
+            }
+
+            return true;
+        }
+
+        public virtual List<ItemModel> GetDefaultData()
+        {
+            return DataStore.IndexAsync().Result.ToList<ItemModel>();
         }
     }
 }

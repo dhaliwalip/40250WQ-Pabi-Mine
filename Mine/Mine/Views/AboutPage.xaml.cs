@@ -33,5 +33,6 @@ namespace Mine.Views
                 MessagingCenter.Send(this, "SetDataSource", 0);
             }
         }
+
     }
 }

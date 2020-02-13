@@ -127,5 +127,24 @@ namespace Mine.Services
         {
             return await Database.Table<ItemModel>().ToListAsync();
         }
+
+        /// <summary>
+        /// Wipe Data List
+        /// Drop the tables and create new ones
+        /// </summary>
+        public async Task<bool> WipeDataListAsync()
+        {
+            try
+            {
+                await Database.DropTableAsync<ItemModel>().ConfigureAwait(false);
+                await Database.CreateTablesAsync(CreateFlags.None, typeof(ItemModel));
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Error WipeData" + e.Message);
+            }
+
+            return await Task.FromResult(true);
+        }
     }
 }
