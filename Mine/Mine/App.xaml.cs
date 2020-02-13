@@ -16,8 +16,7 @@ namespace Mine
         public App()
         {
             InitializeComponent();
-            ItemIndexViewModel temp = ItemIndexViewModel.Instanc
-
+            ItemIndexViewModel temp = ItemIndexViewModel.Instance;
 
             //DependencyService.Register<MockDataStore>();
             //DependencyService.Register<DatabaseService>();

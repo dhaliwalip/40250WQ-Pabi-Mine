@@ -18,10 +18,10 @@ namespace Mine.ViewModels
     public class ItemIndexViewModel : BaseViewModel
     {
 
-
-
         // The Data set of records
+
         public ObservableCollection<ItemModel> Dataset { get; set; }
+        //public List<ItemModel> Dataset;
 
         /// <summary>
         /// Connection to the Data store
@@ -38,10 +38,12 @@ namespace Mine.ViewModels
             if (isSql == 1)
             {
                 DataStore = DataSource_SQL;
+                CurrentDataSource = 1;
             }
             else
             {
                 DataStore = DataSource_Mock;
+                CurrentDataSource = 0;
             }
 
             SetNeedsRefresh(true);
@@ -90,10 +92,12 @@ namespace Mine.ViewModels
         /// </summary>
         public ItemIndexViewModel()
         {
-            SetDataSource(0);
+            //SetDataSource(0);
             Title = "Items";
 
             Dataset = new ObservableCollection<ItemModel>();
+            
+
             LoadDatasetCommand = new Command(async () => await ExecuteLoadDataCommand());
 
             // Register the Create Message
@@ -121,7 +125,7 @@ namespace Mine.ViewModels
              });
 
             //Register the wipe Data Source Message
-            MessagingCenter.Subscribe<AboutPage, int>(this, "WipeDataAsync", async (obj, data) =>
+            MessagingCenter.Subscribe<AboutPage, bool>(this, "WipeDataList", async (obj, data) =>
             {
                 await WipeDataListAsync();
             });
@@ -306,13 +310,12 @@ namespace Mine.ViewModels
             return result;
         }
 
-
-        /// <summary>
-        /// Get the data
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        public async Task<ItemModel> ReadAsync(string id)
+            /// <summary>
+            /// Get the data
+            /// </summary>
+            /// <param name="id"></param>
+            /// <returns></returns>
+            public async Task<ItemModel> ReadAsync(string id)
         {
             var myData = await DataStore.ReadAsync(id);
             return myData;
@@ -395,6 +398,7 @@ namespace Mine.ViewModels
         public async void Initialize()
         {
             Dataset = new ObservableCollection<ItemModel>();
+
             LoadDatasetCommand = new Command(async () => await ExecuteLoadDataCommand());
 
             await SetDataSource(CurrentDataSource);   // Set to Mock to start with
