@@ -1,6 +1,7 @@
 ﻿using Xamarin.Forms;
 using Mine.Services;
 using Mine.Views;
+using Mine.ViewModels;
 
 namespace Mine
 {
@@ -15,6 +16,8 @@ namespace Mine
         public App()
         {
             InitializeComponent();
+            ItemIndexViewModel temp = ItemIndexViewModel.Instanc
+
 
             //DependencyService.Register<MockDataStore>();
             //DependencyService.Register<DatabaseService>();

@@ -16,6 +16,9 @@ namespace Mine.ViewModels
     /// </summary>
     public class ItemIndexViewModel : BaseViewModel
     {
+
+
+
         // The Data set of records
         public ObservableCollection<ItemModel> Dataset { get; set; }
 
@@ -29,7 +32,7 @@ namespace Mine.ViewModels
 
         public int CurrentDataSource = 0;
 
-        public bool SetDataSource(int isSql)
+        async public Task<bool> SetDataSource(int isSql)
         {
             if (isSql == 1)
             {
@@ -41,12 +44,43 @@ namespace Mine.ViewModels
             }
 
             SetNeedsRefresh(true);
-            return true;
+            return await Task.FromResult(true);
         }
+
         // Command to force a Load of data
         public Command LoadDatasetCommand { get; set; }
+       
 
         private bool _needsRefresh;
+
+        #region Singleton
+
+        // Make this a singleton so it only exist one time because holds all the data records in memory
+        private static volatile ItemIndexViewModel instance;
+        private static readonly object syncRoot = new Object();
+
+        public static ItemIndexViewModel Instance
+        {
+            get
+            {
+                if (instance == null)
+                {
+                    lock (syncRoot)
+                    {
+                        if (instance == null)
+                        {
+                            instance = new ItemIndexViewModel();
+                            instance.Initialize();
+                        }
+                    }
+                }
+
+                return instance;
+            }
+        }
+
+        #endregion Singleton
+
 
         /// <summary>
         /// Constructor
@@ -353,6 +387,14 @@ namespace Mine.ViewModels
             }
 
             return false;
+        }
+
+        public async void Initialize()
+        {
+            Dataset = new ObservableCollection<ItemModel>();
+            LoadDatasetCommand = new Command(async () => await ExecuteLoadDataCommand());
+
+            await SetDataSource(CurrentDataSource);   // Set to Mock to start with
         }
     }
 }
