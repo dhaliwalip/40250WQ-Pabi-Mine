@@ -80,12 +80,10 @@ namespace Mine.Views
             // If no data, then set it for needing refresh
             if (viewModel.Dataset.Count == 0)
             {
-                viewModel.SetNeedsRefresh(true);
+                viewModel.LoadDatasetCommand.Execute(null);
             }
 
-            
 
-            BindingContext = viewModel;
         }
     }
 }

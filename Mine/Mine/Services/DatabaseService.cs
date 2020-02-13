@@ -70,8 +70,8 @@ namespace Mine.Services
         public async Task<ItemModel> ReadAsync(string id)
         {
             return await Database.Table<ItemModel>().Where(i => i.Id.Equals(id)).FirstOrDefaultAsync();
-        } 
-    
+        }
+
 
         /// <summary>
         /// Update the record passed in if it exists
