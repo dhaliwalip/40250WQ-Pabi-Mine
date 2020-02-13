@@ -56,10 +56,10 @@ namespace Mine.Services
         /// </summary>
         /// <param name="data"></param>
         /// <returns></returns>
-        public async Task<bool> CreateAsync(ItemModel data)
+        public Task<bool> CreateAsync(ItemModel data)
         {
-            var result = await Database.InsertAsync(data);
-            return (result == 1);
+            Database.InsertAsync(data);
+            return Task.FromResult(true);
         }
 
         /// <summary>
@@ -69,19 +69,9 @@ namespace Mine.Services
         /// <returns></returns>
         public async Task<ItemModel> ReadAsync(string id)
         {
-            ItemModel data;
-
-            try
-            {
-                data = await Database.Table<ItemModel>().Where((ItemModel arg) => ((ItemModel)(object)arg).Id.Equals(id)).FirstOrDefaultAsync();
-            }
-            catch (Exception)
-            {
-                data = default(ItemModel);
-            }
-
-            return data;
-        }
+            return await Database.Table<ItemModel>().Where(i => i.Id.Equals(id)).FirstOrDefaultAsync();
+        } 
+    
 
         /// <summary>
         /// Update the record passed in if it exists

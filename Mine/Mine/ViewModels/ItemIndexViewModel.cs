@@ -196,11 +196,6 @@ namespace Mine.ViewModels
         /// <returns></returns>
         public async Task<bool> Update(ItemModel data)
         {
-            if (data == null)
-            {
-                return false;
-            }
-
             // Check that the record exists, if it does not, then exit with false
             var record = await Read(data.Id);
             if (record == null)
