@@ -88,7 +88,7 @@ namespace Mine.Services
 
             var result = await Database.UpdateAsync(Data);
 
-            return (result == 1);
+            return await Task.FromResult(true);
         }
 
         /// <summary>

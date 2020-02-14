@@ -18,11 +18,6 @@ namespace Mine.Views
         // View Model for Item
         ItemViewModel ViewModel;
 
-        // Constructor for UTs
-        public ItemUpdatePage()
-        {
-        }
-
         /// <summary>
         /// Constructor that takes and existing data item
         /// </summary>
@@ -38,10 +33,13 @@ namespace Mine.Views
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        public async void Save_Clicked(object sender, EventArgs e)
+        async void Save_Clicked(object sender, EventArgs e)
         {
             MessagingCenter.Send(this, "Update", ViewModel.Data);
             await Navigation.PopModalAsync();   // Remove this page
+
+            // Force the ViewModel to set Refresh
+            ItemIndexViewModel.Instance.ForceDataRefresh();
         }
 
         /// <summary>
@@ -49,7 +47,7 @@ namespace Mine.Views
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        public async void Cancel_Clicked(object sender, EventArgs e)
+        async void Cancel_Clicked(object sender, EventArgs e)
         {
             await Navigation.PopModalAsync();   // Remove this page
         }
@@ -59,7 +57,7 @@ namespace Mine.Views
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        public void Value_OnStepperValueChanged(object sender, ValueChangedEventArgs e)
+        void Value_OnStepperValueChanged(object sender, ValueChangedEventArgs e)
         {
             ValueValue.Text = String.Format("{0}", e.NewValue);
         }
